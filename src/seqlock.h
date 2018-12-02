@@ -1,10 +1,12 @@
 #include "spinlock.h"
 
+template<typename T>
 class Seqlock
 {
     Spinlock spinLock;
+    T storedValue;
 public:
-    Seqlock();
-    void lock();
-    void unlock();
+    Seqlock(T &value);
+    void store(T &value);
+    T load();
 };
