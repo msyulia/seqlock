@@ -1,4 +1,5 @@
 #include <atomic>
+
 class Spinlock
 {
     std::atomic_int counter;

@@ -1,4 +1,5 @@
-.idea
+# CLion project files
+.idea/
 
 # Remove cmake build files
-cmake-build-*
+bin/

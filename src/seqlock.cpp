@@ -1,29 +1,33 @@
 #include "seqlock.h"
 
-template<typename T>
-Seqlock<T>::Seqlock(T &value)
-{
-	this->spinLock = Spinlock();
-}
+Seqlock::Seqlock() = default;
 
-template<typename T>
-void Seqlock<T>::store(T &value)
+void Seqlock::BeginWrite()
 {
 	this->spinLock.lock();
-
-	// Critical section
-	this->storedValue.store(value);
-
-	this->spinLock.unlock();
 }
 
-template<typename T>
-T Seqlock<T>::load()
+void Seqlock::EndWrite()
 {
-	T result = NULL;
-	while(this->spinLock.getCounter() % 2 == 1)
-	{
-		result = this->storedValue.load();
-	}
-	return result;
+    this->spinLock.unlock();
+}
+
+void Seqlock::BeginRead()
+{
+    // Wait for the writer to finish writing
+	while(isWriting());
+}
+
+void Seqlock::EndRead()
+{
+    // If a writer locked the spinlock, start reading again
+    if(isWriting())
+    {
+        this->BeginRead();
+    }
+}
+
+bool Seqlock::isWriting()
+{
+    return this->spinLock.getCounter() % 2 == 1;
 }
