@@ -1,7 +1,12 @@
-cmake_minimum_required(VERSION 3.12)
-project(seqlock)
-add_definitions("-std=c++17")
+CMAKE_MINIMUM_REQUIRED( VERSION 3.12 )
+PROJECT( seqlock )
 
-add_executable(seqlock src/main.cpp src/seqlock.cpp src/seqlock.h src/spinlock.cpp src/spinlock.h)
+ADD_DEFINITIONS( "-std=c++17" )
 
+ADD_SUBDIRECTORY(src)
+ADD_SUBDIRECTORY(tests)
+
+ENABLE_TESTING()
+
+ADD_TEST( NAME SeqLockTests COMMAND Test)
 
