@@ -1,3 +1,0 @@
-﻿  main.cpp
-c:\dev\seqlock\seqlock\src\main.cpp(12): warning C4018: '<': signed/unsigned mismatch
-  SeqLock.vcxproj -> C:\Dev\seqlock\SeqLock\Debug\SeqLock.exe
