@@ -1,5 +1,0 @@
-# CLion project files
-.idea/
-
-# Remove cmake build files
-bin/
